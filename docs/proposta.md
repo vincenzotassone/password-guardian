@@ -1,77 +1,160 @@
-Password Guardian - Generatore e Analizzatore di Password Sicure
+# Password Guardian – Generatore Avanzato e Analizzatore di Password Sicure
 
-Componenti del gruppo
+## Componenti del gruppo
 
-Vincenzo Tassone
-Gabriele Rosso
+* Vincenzo Tassone
+* Gabriele Rosso
 
-Descrizione del progetto
+---
 
-Password Guardian è un’applicazione sviluppata in Python che consente di generare password sicure e di analizzarne la robustezza. Il programma permette all’utente di creare password personalizzabili in base a lunghezza e complessità, verificare la sicurezza di password esistenti e ottenere suggerimenti per migliorarle.
+# Descrizione del progetto
 
-L’applicazione fornisce inoltre un punteggio complessivo di sicurezza, una stima dell’entropia della password e la possibilità di salvare report in formato JSON.
+**Password Guardian** è un'applicazione sviluppata in Python che ha come obiettivo principale la **generazione di password e passphrase sicure**, completamente personalizzabili secondo politiche di sicurezza configurabili dall'utente.
 
-Problema che risolve
+Il programma permette di:
 
-Molti utenti utilizzano password deboli e facilmente individuabili tramite attacchi brute-force o dizionario. Questo progetto aiuta a creare password più sicure e a comprendere il livello di protezione offerto dalle proprie credenziali.
+* generare password casuali ad alta sicurezza;
+* generare **passphrase memorizzabili** ispirate al metodo Diceware;
+* definire regole personalizzate (lunghezza minima, caratteri obbligatori, simboli, numeri, maiuscole, esclusione di caratteri ambigui, ecc.);
+* verificare automaticamente che la password generata rispetti tutte le politiche impostate;
+* analizzare password già esistenti per valutarne la robustezza;
+* calcolare il livello di entropia;
+* assegnare un punteggio di sicurezza;
+* esportare un report dettagliato in formato JSON.
 
-Lo strumento può essere utilizzato sia in ambito personale sia come supporto didattico per comprendere i principi della sicurezza delle password.
+L'obiettivo è realizzare uno strumento che **prima genera password robuste** e successivamente ne verifica automaticamente la conformità alle regole di sicurezza.
 
-Competenze del corso utilizzate
+---
 
-Programmazione orientata agli oggetti (OOP)
-Ereditarietà e polimorfismo
-Espressioni regolari (Regex)
-Gestione di file e JSON
-Hashing
-Argparse per la realizzazione di una CLI
+# Problema che risolve
 
-Gerarchia di ereditarietà prevista
+Molti utenti utilizzano password deboli oppure creano password casuali che risultano difficili da ricordare.
 
-Classe base:
+Password Guardian risolve questo problema offrendo due modalità di generazione:
 
-RegolaPassword
+* password casuali ad alta entropia;
+* passphrase lunghe e facilmente memorizzabili.
 
-Sottoclassi:
+Ogni password generata viene immediatamente controllata per garantire il rispetto delle politiche di sicurezza configurate dall'utente.
 
-RegolaLunghezza
-RegolaCaratteri
-RegolaPattern
-RegolaDizionario
+L'applicazione può essere utilizzata sia in ambito personale sia come supporto didattico per comprendere le tecniche di creazione e valutazione delle password.
 
-Metodo polimorfico:
+---
 
+# Competenze del corso utilizzate
+
+* Programmazione orientata agli oggetti (OOP)
+* Ereditarietà
+* Polimorfismo
+* Espressioni regolari (Regex)
+* Gestione di file JSON
+* Calcolo dell'entropia
+* Hashing
+* Argparse per la realizzazione della CLI
+
+---
+
+# Gerarchia di ereditarietà prevista
+
+## Classe base
+
+**RegolaPassword**
+
+### Sottoclassi
+
+* RegolaLunghezza
+* RegolaCaratteri
+* RegolaPattern
+* RegolaDizionario
+
+### Metodo polimorfico
+
+```python
 verifica(password)
+```
 
-Ogni sottoclasse implementerà il metodo verifica() in modo differente. Il valutatore applicherà tutte le regole senza conoscere il tipo concreto della regola utilizzata, sfruttando così il polimorfismo.
+Ogni sottoclasse implementa il metodo `verifica()` in modo differente.
 
-Piano di sviluppo
+Il sistema di validazione applica automaticamente tutte le regole senza conoscere il tipo concreto della regola, sfruttando il polimorfismo.
 
-Fase 1
+Questa struttura permette di aggiungere facilmente nuove regole senza modificare il codice esistente.
 
-Creazione repository GitHub
-Definizione struttura del progetto
-Implementazione generatore di password
-Implementazione della gerarchia delle regole
+---
 
-Fase 2
+# Funzionalità principali
 
-Sistema di valutazione delle password
-Calcolo dell’entropia
-Salvataggio dei report in formato JSON
+### Generatore di password
 
-Fase 3
+* lunghezza configurabile;
+* scelta dei caratteri utilizzabili;
+* esclusione dei caratteri ambigui;
+* password casuali ad alta entropia;
+* verifica automatica del rispetto delle regole.
 
-Realizzazione dei test automatici con pytest
-Stesura della documentazione
-Correzione bug e rifinitura del progetto
+### Generatore di passphrase
 
-Obiettivo intermedio
+* generazione di passphrase tramite liste di parole;
+* stile Diceware;
+* maggiore facilità di memorizzazione;
+* elevata sicurezza grazie alla lunghezza.
 
-Entro metà sviluppo prevediamo di completare il generatore di password, la struttura ad oggetti e il sistema base di valutazione.
+### Analizzatore
 
-Possibili estensioni
+* verifica della robustezza;
+* controllo delle regole;
+* calcolo dell'entropia;
+* valutazione complessiva della sicurezza;
+* suggerimenti per il miglioramento.
 
-Controllo di password compromesse tramite hash
-Miglioramento del sistema di valutazione
-Esportazione avanzata dei report
+### Report
+
+* esportazione dei risultati in formato JSON.
+
+---
+
+# Piano di sviluppo
+
+## Fase 1
+
+* Creazione del repository GitHub
+* Definizione della struttura del progetto
+* Implementazione del generatore di password
+* Implementazione del generatore di passphrase
+* Realizzazione della gerarchia delle regole
+
+## Fase 2
+
+* Sistema di verifica automatica delle password generate
+* Analizzatore di password
+* Calcolo dell'entropia
+* Esportazione dei report JSON
+
+## Fase 3
+
+* Test automatici con pytest
+* Documentazione completa
+* Correzione bug
+* Ottimizzazione del codice
+
+---
+
+# Obiettivo intermedio
+
+Entro metà dello sviluppo prevediamo di completare:
+
+* il generatore di password;
+* il generatore di passphrase;
+* la struttura a oggetti;
+* il sistema di verifica delle regole;
+* una prima versione dell'analizzatore.
+
+---
+
+# Possibili estensioni
+
+* Controllo delle password compromesse tramite database di hash (es. Have I Been Pwned tramite k-anonymity).
+* Introduzione di nuove politiche di sicurezza configurabili.
+* Esportazione avanzata dei report.
+* Interfaccia grafica (GUI).
+* Supporto a file di configurazione per definire policy personalizzate.
+
