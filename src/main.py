@@ -11,25 +11,42 @@ def main():
     generatore = PasswordGenerator()
 
     print("PASSWORD GUARDIAN")
-    print()
+    print("1 - Genera password")
+    print("2 - Genera passphrase")
 
-    lunghezza = int(input("Lunghezza password: "))
+    scelta = input("Scelta: ")
 
-    maiuscole = risposta_si_no("Usare lettere maiuscole? (s/n): ")
-    minuscole = risposta_si_no("Usare lettere minuscole? (s/n): ")
-    numeri = risposta_si_no("Usare numeri? (s/n): ")
-    simboli = risposta_si_no("Usare simboli? (s/n): ")
+    if scelta == "1":
 
-    password = generatore.genera_password(
-        lunghezza,
-        maiuscole,
-        minuscole,
-        numeri,
-        simboli
-    )
+        lunghezza = int(input("Lunghezza password: "))
 
-    print("\nPassword generata:")
-    print(password)
+        maiuscole = risposta_si_no("Usare lettere maiuscole? (s/n): ")
+        minuscole = risposta_si_no("Usare lettere minuscole? (s/n): ")
+        numeri = risposta_si_no("Usare numeri? (s/n): ")
+        simboli = risposta_si_no("Usare simboli? (s/n): ")
+
+        password = generatore.genera_password(
+            lunghezza,
+            maiuscole,
+            minuscole,
+            numeri,
+            simboli
+        )
+
+        print("\nPassword generata:")
+        print(password)
+
+    elif scelta == "2":
+
+        numero_parole = int(input("Quante parole vuoi nella passphrase? "))
+
+        passphrase = generatore.genera_passphrase(numero_parole)
+
+        print("\nPassphrase generata:")
+        print(passphrase)
+
+    else:
+        print("Scelta non valida.")
 
 
 if __name__ == "__main__":
