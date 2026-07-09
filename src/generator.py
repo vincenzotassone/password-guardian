@@ -30,3 +30,15 @@ class PasswordGenerator:
             password += secrets.choice(caratteri)
 
         return password
+
+    def genera_passphrase(self, numero_parole=4):
+
+        with open("words.txt", "r", encoding="utf-8") as file:
+            parole = file.read().splitlines()
+
+        scelta = []
+
+        for _ in range(numero_parole):
+            scelta.append(secrets.choice(parole))
+
+        return "-".join(scelta)
