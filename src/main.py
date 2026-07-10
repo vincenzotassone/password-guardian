@@ -1,4 +1,5 @@
 from generator import PasswordGenerator
+from rules import RegolaLunghezza, RegolaMaiuscola, RegolaNumero
 
 
 def risposta_si_no(domanda):
@@ -35,6 +36,21 @@ def main():
 
         print("\nPassword generata:")
         print(password)
+
+        # Verifica delle regole
+        regole = [
+            RegolaLunghezza(),
+            RegolaMaiuscola(),
+            RegolaNumero()
+        ]
+
+        print("\nVerifica password:")
+
+        for regola in regole:
+            if regola.verifica(password):
+                print(type(regola).__name__, "OK")
+            else:
+                print(type(regola).__name__, "NON OK")
 
     elif scelta == "2":
 
