@@ -1,4 +1,5 @@
 from generator import PasswordGenerator
+from analyzer import PasswordAnalyzer
 from rules import RegolaLunghezza, RegolaMaiuscola, RegolaNumero
 
 
@@ -10,10 +11,12 @@ def risposta_si_no(domanda):
 def main():
 
     generatore = PasswordGenerator()
+    analyzer = PasswordAnalyzer()
 
     print("PASSWORD GUARDIAN")
     print("1 - Genera password")
     print("2 - Genera passphrase")
+    print("3 - Analizza password")
 
     scelta = input("Scelta: ")
 
@@ -37,7 +40,6 @@ def main():
         print("\nPassword generata:")
         print(password)
 
-        # Verifica delle regole
         regole = [
             RegolaLunghezza(),
             RegolaMaiuscola(),
@@ -60,6 +62,22 @@ def main():
 
         print("\nPassphrase generata:")
         print(passphrase)
+
+    elif scelta == "3":
+
+        password = input("Inserisci la password da analizzare: ")
+
+        risultato = analyzer.analizza(password)
+
+        print("\nAnalisi password")
+        print("----------------")
+        print("Lunghezza:", risultato["lunghezza"])
+        print("Entropia:", risultato["entropia"])
+        print("Livello:", risultato["livello"])
+        print("Maiuscole:", risultato["maiuscole"])
+        print("Minuscole:", risultato["minuscole"])
+        print("Numeri:", risultato["numeri"])
+        print("Simboli:", risultato["simboli"])
 
     else:
         print("Scelta non valida.")
