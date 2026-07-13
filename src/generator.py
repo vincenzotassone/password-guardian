@@ -1,5 +1,6 @@
 import secrets
 import string
+from pathlib import Path
 
 
 class PasswordGenerator:
@@ -33,7 +34,9 @@ class PasswordGenerator:
 
     def genera_passphrase(self, numero_parole=4):
 
-        with open("words.txt", "r", encoding="utf-8") as file:
+        file_parole = Path(__file__).parent / "words.txt"
+
+        with open(file_parole, "r", encoding="utf-8") as file:
             parole = file.read().splitlines()
 
         scelta = []
