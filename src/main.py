@@ -1,6 +1,7 @@
 from generator import PasswordGenerator
 from analyzer import PasswordAnalyzer
 from rules import RegolaLunghezza, RegolaMaiuscola, RegolaNumero
+from report import ReportManager
 
 
 def risposta_si_no(domanda):
@@ -12,13 +13,17 @@ def main():
 
     generatore = PasswordGenerator()
     analyzer = PasswordAnalyzer()
+    report = ReportManager()
 
-    print("PASSWORD GUARDIAN")
+    print("===================================")
+    print("      PASSWORD GUARDIAN")
+    print("===================================")
     print("1 - Genera password")
     print("2 - Genera passphrase")
     print("3 - Analizza password")
+    print("0 - Esci")
 
-    scelta = input("Scelta: ")
+    scelta = input("\nScelta: ")
 
     if scelta == "1":
 
@@ -50,9 +55,9 @@ def main():
 
         for regola in regole:
             if regola.verifica(password):
-                print(type(regola).__name__, "OK")
+                print(f"{type(regola).__name__}: OK")
             else:
-                print(type(regola).__name__, "NON OK")
+                print(f"{type(regola).__name__}: NON OK")
 
     elif scelta == "2":
 
@@ -69,17 +74,29 @@ def main():
 
         risultato = analyzer.analizza(password)
 
-        print("\nAnalisi password")
-        print("----------------")
-        print("Lunghezza:", risultato["lunghezza"])
-        print("Entropia:", risultato["entropia"])
-        print("Livello:", risultato["livello"])
-        print("Maiuscole:", risultato["maiuscole"])
-        print("Minuscole:", risultato["minuscole"])
-        print("Numeri:", risultato["numeri"])
-        print("Simboli:", risultato["simboli"])
+        # Aggiunge la password al report JSON
+        risultato["password"] = password
+
+        # Salva il report
+        report.salva_report(risultato)
+
+        print("\n===== ANALISI PASSWORD =====")
+        print("Lunghezza :", risultato["lunghezza"])
+        print("Entropia  :", risultato["entropia"])
+        print("Livello   :", risultato["livello"])
+        print("Maiuscole :", risultato["maiuscole"])
+        print("Minuscole :", risultato["minuscole"])
+        print("Numeri    :", risultato["numeri"])
+        print("Simboli   :", risultato["simboli"])
+
+        print("\nReport JSON salvato nella cartella 'reports'.")
+
+    elif scelta == "0":
+
+        print("Programma terminato.")
 
     else:
+
         print("Scelta non valida.")
 
 
